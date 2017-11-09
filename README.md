@@ -6,14 +6,30 @@
 Create custom context menus easily
 
 ## Usage
----
 ### 1. Import js and css
+Import jQuery first :
 ```html
 <script src='path/to/jquery.min.js'></script>
-<script src='path/to/custoMenu.js'></script>
-<link href="path/to/custoMenu.css" rel="stylesheet" />
 ```
-### 2. Create your context menu object with his name, the different functions and their properties<br>
+Then custoMenu :
+```html
+<script src='path/to/custoMenu.js'></script>
+<link  href="path/to/custoMenu.css" rel="stylesheet" />
+```
+You can use raw github links to keep updated custoMenu :
+```html
+<script src='https://raw.githubusercontent.com/TheRolfFR/custoMenu/master/custoMenu.js'></script>
+<link  href="https://raw.githubusercontent.com/TheRolfFR/custoMenu/master/custoMenu.css" rel="stylesheet" />
+```
+### 2. Create your context menu object
+Handles these properties :
+
+|      | Required |Type          | Desc |
+| ---- |:--------:|------------- | ---- |
+| 0    | X        | String       | Name of the custoMenu |
+| text | X        | String       | Text of the custoMenu item |
+| desc |          | String       | Description of the custoMenu item |
+| func | X        | Function     | Function associated to the custoMenu item |
 ```javascript
 var filectxmenu = {
   0: 'file',
@@ -32,9 +48,8 @@ custoMenu.addMenu(filectxmenu);
 ```
 ### 4. Add class and data attributes to your elements
   * class : custoMe
-  * data-type: file (name of your function)
-  * data-src: path/to/file.txt (path of your file)
+  * data-name: file (name of your function)
 ```html
-<div class="custoMe" data-type="file" data-src="path/to/file.txt">file.txt</div>
+<div class="custoMe" data-name="file">file.txt</div>
 ```
 ### 5. Enjoy !
