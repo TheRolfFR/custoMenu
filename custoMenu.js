@@ -1,12 +1,9 @@
-
-
-var customMenu = {
+var custoMenu = {
 	functions: {},
-	dataSrc: '',
-	dataType: '',
+	element: '',
 	
 	addMenu : function(array) {
-		var menu = $('<ul class="custom-menu" data-type="' + array[0] + '"></ul>').appendTo('body').hide();
+		var menu = $('<ul class="custoMenu" data-name="' + array[0] + '"></ul>').appendTo('body').hide();
 		
 		for(var key in array) {
 			if(isNaN(parseInt(key))) {
@@ -19,46 +16,50 @@ var customMenu = {
 		}
 	},
 	openMenu : function(element, e) {
-		this.upData(element);
+		this.upElement(element);
 		
-		// detect type
-		var ctxmenu = $('.custom-menu[data-type=' + this.dataType + ']');
-
+		// get name
+		var name = this.getData('data-name');
+		// get custoMenu
+		var ctxmenu = $('.custoMenu[data-name=' + name + ']');
+		
+		//display custoMenu
 		ctxmenu.show().css({
 			top: e.pageY + "px",
 			left: e.pageX + "px"
-		}).attr('data-src', this.dataSrc);
+		});
 
+		// adjust position
 		if($(window).innerHeight() - e.pageY < ctxmenu.innerHeight()) {
 			ctxmenu.css('top', e.pageY-ctxmenu.innerHeight());
 		}
 	},
 	closeMenu: function() {
-		$('.custom-menu').hide();
+		$('.custoMenu').hide();
 	},
 	openFunction: function(element) {
-		var name = element.attr('data-action');
-		this.functions[name]();
+		var action = element.attr('data-action');
+		if(typeof this.functions[action] === "function") {
+			this.functions[action]();
+		}
 	},
-	upData: function(element) {
-		this.dataType = element.attr('data-type');
-		this.dataSrc = element.attr('data-src');
+	upElement: function(element) {
+		this.element = element;
+	},
+	getData: function(attribute) {
+		return this.element.attr(attribute);
 	}
 }
 
-customMenu.addMenu(filectxmenu);
-customMenu.addMenu(contentmenu);
-customMenu.addMenu(foldermenu);
-
-$(document).on('contextmenu', '.context', function(e){
+$(document).on('contextmenu', '.custoMe', function(e){
 	e.preventDefault();
 	e.stopPropagation();
-	customMenu.closeMenu();
-	customMenu.openMenu($(this), e);
+	custoMenu.closeMenu();
+	custoMenu.openMenu($(this), e);
 });
-$(document).on('click', '.custom-menu li', function(){
-	customMenu.openFunction($(this));
+$(document).on('click', '.custoMenu li', function(){
+	custoMenu.openFunction($(this));
 });
 $('body').on('click', function(e){
-	customMenu.closeMenu();
+	custoMenu.closeMenu();
 });
