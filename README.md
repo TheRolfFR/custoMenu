@@ -16,7 +16,7 @@ Then custoMenu :
 <script src='path/to/custoMenu.js'></script>
 <link  href="path/to/custoMenu.css" rel="stylesheet" />
 ```
-You can use raw github links to keep updated custoMenu :
+You can use raw github links to keep updated your custoMenu :
 ```html
 <script src='https://raw.githubusercontent.com/TheRolfFR/custoMenu/master/custoMenu.js'></script>
 <link  href="https://raw.githubusercontent.com/TheRolfFR/custoMenu/master/custoMenu.css" rel="stylesheet" />
@@ -27,15 +27,15 @@ Handles these properties :
 |      | Required |Type          | Desc |
 | ---- |:--------:|------------- | ---- |
 | 0    | X        | String       | Name of the custoMenu |
-| text | X        | String       | Text of the custoMenu item |
+| text | X        | HTML         | Text of the custoMenu item |
 | desc |          | String       | Description of the custoMenu item |
 | func | X        | Function     | Function associated to the custoMenu item |
 ```javascript
 var filectxmenu = {
   0: 'file',
   'openfile' : { // function name must be unique throught every object. If not the last function will be choosed
-    text: 'Open file', // any html or text 
-    desc: 'Open', // will be the name of the function if empty or not existing
+    text: 'Open file',
+    desc: 'Open',
     func: function() { 
       // my function
     }
@@ -53,3 +53,8 @@ custoMenu.addMenu(filectxmenu);
 <div class="custoMe" data-name="file">file.txt</div>
 ```
 ### 5. Enjoy !
+
+
+## Licence
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Licence Creative Commons" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br />
+Attribution <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">by-nc-sa 4.0</a> International (CC BY 4.0) 
