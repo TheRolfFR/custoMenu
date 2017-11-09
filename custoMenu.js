@@ -10,12 +10,18 @@ var custoMenu = {
 				var desc = array[key]['desc'] || ucfirst(key);
 				menu.append('<li data-action="' + key + '" title="' + desc + '">' + array[key]['text'] + '</li>');
 				if(array[key]['func'] !== undefined) {
-					this.functions[key] = array[key]['func'];
+					if(typeof array[key]['func'] === "function") {
+						this.functions[key] = array[key]['func'];
+					}
 				}
 			}
 		}
 	},
 	openMenu : function(element, e) {
+		// close all custoMenus
+		this.closeMenu();
+		
+		// update last element
 		this.upElement(element);
 		
 		// get name
@@ -54,7 +60,6 @@ var custoMenu = {
 $(document).on('contextmenu', '.custoMe', function(e){
 	e.preventDefault();
 	e.stopPropagation();
-	custoMenu.closeMenu();
 	custoMenu.openMenu($(this), e);
 });
 $(document).on('click', '.custoMenu li', function(){
