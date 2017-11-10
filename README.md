@@ -39,7 +39,7 @@ var filectxmenu = {
 			text: '<i class="material-icons">&#xE254;</i>',
 			desc: 'Open',
 			func: function() {
-				alert('lol');
+				// your function
 			} // etc...
   }
 }
