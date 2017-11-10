@@ -13,12 +13,12 @@ Import jQuery first :
 ```
 Then custoMenu :
 ```html
-<script src='path/to/custoMenu.js'></script>
+<script src="path/to/custoMenu.js"></script>
 <link  href="path/to/custoMenu.css" rel="stylesheet" />
 ```
 You can use rawgit links to keep updated your custoMenu :
 ```html
-<script src='https://rawgit.com/TheRolfFR/custoMenu/master/custoMenu.js'></script>
+<script src="https://rawgit.com/TheRolfFR/custoMenu/master/custoMenu.js"></script>
 <link  href="https://rawgit.com/TheRolfFR/custoMenu/master/custoMenu.css" rel="stylesheet" />
 ```
 ### 2. Create your context menu object
