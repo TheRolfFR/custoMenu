@@ -26,20 +26,22 @@ Handles these properties :
 
 |      | Required |Type          | Desc |
 | ---- |:--------:|------------- | ---- |
-| 0    | X        | String       | Name of the custoMenu |
+| name | X        | String       | Name of the custoMenu |
+| items| X        | Object       | Contains your functions |
 | text | X        | HTML         | Text of the custoMenu item |
 | desc |          | String       | Description of the custoMenu item |
 | func | X        | Function     | Function associated to the custoMenu item |
 ```javascript
 var filectxmenu = {
-  0: 'file',
-  'openfile' : { // function name must be unique throught every object. If not the last function will be choosed
-    text: 'Open file',
-    desc: 'Open',
-    func: function() { 
-      // my function
-    }
-  } // etc...
+	name: 'file',
+	items: {
+		'openfile' : { // function name must be unique throught every object. If not the last function will be choosed
+			text: '<i class="material-icons">&#xE254;</i>',
+			desc: 'Open',
+			func: function() {
+				alert('lol');
+			} // etc...
+  }
 }
   ```
 ### 3. Add your object to CustoMenu in your script
