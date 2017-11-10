@@ -16,10 +16,10 @@ Then custoMenu :
 <script src='path/to/custoMenu.js'></script>
 <link  href="path/to/custoMenu.css" rel="stylesheet" />
 ```
-You can use raw github links to keep updated your custoMenu :
+You can use rawgit links to keep updated your custoMenu :
 ```html
-<script src='https://raw.githubusercontent.com/TheRolfFR/custoMenu/master/custoMenu.js'></script>
-<link  href="https://raw.githubusercontent.com/TheRolfFR/custoMenu/master/custoMenu.css" rel="stylesheet" />
+<script src='https://rawgit.com/TheRolfFR/custoMenu/master/custoMenu.js'></script>
+<link  href="https://rawgit.com/TheRolfFR/custoMenu/master/custoMenu.css" rel="stylesheet" />
 ```
 ### 2. Create your context menu object
 Handles these properties :
