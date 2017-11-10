@@ -3,16 +3,22 @@ var custoMenu = {
 	element: '',
 	
 	addMenu : function(array) {
-		var menu = $('<ul class="custoMenu" data-name="' + array[0] + '"></ul>').appendTo('body').hide();
+		// append menu
+		var menu = $('<ul class="custoMenu" data-name="' + array['name'] + '"></ul>').appendTo('body').hide();
 		
-		for(var key in array) {
-			if(isNaN(parseInt(key))) {
-				var desc = array[key]['desc'] || ucfirst(key);
-				menu.append('<li data-action="' + key + '" title="' + desc + '">' + array[key]['text'] + '</li>');
-				if(array[key]['func'] !== undefined) {
-					if(typeof array[key]['func'] === "function") {
-						this.functions[key] = array[key]['func'];
-					}
+		// for each item in array
+		for(var key in array['items']) {
+			// get desc 
+			var desc = array['items'][key]['desc'] || key.charAt(0).toUpperCase() + key.substr(1);
+			
+			// append item
+			menu.append('<li data-action="' + key + '" title="' + desc + '">' + array['items'][key]['text'] + '</li>');
+			
+			// if defined, save function
+			var func = array['items'][key]['func'];
+			if(func !== undefined) {
+				if(typeof func === "function") {
+					this.functions[key] = func;
 				}
 			}
 		}
@@ -41,18 +47,24 @@ var custoMenu = {
 		}
 	},
 	closeMenu: function() {
+		// hide menu
 		$('.custoMenu').hide();
 	},
 	openFunction: function(element) {
+		// get name of function
 		var action = element.attr('data-action');
+		// if this function is defined
 		if(typeof this.functions[action] === "function") {
+			// execute it
 			this.functions[action]();
 		}
 	},
 	upElement: function(element) {
+		//update last last clicked element
 		this.element = element;
 	},
 	getData: function(attribute) {
+		// get last clicked element attribute
 		return this.element.attr(attribute);
 	}
 }
