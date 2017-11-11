@@ -68,15 +68,16 @@ var custoMenu = {
 		return this.element.attr(attribute);
 	}
 }
-
-$(document).on('contextmenu', '.custoMe', function(e){
-	e.preventDefault();
-	e.stopPropagation();
-	custoMenu.openMenu($(this), e);
-});
-$(document).on('click', '.custoMenu li', function(){
-	custoMenu.openFunction($(this));
-});
-$('body').on('click', function(e){
-	custoMenu.closeMenu();
+$(document).ready(function(){
+	$(document).on('contextmenu', '.custoMe', function(e){
+		e.preventDefault();
+		e.stopPropagation();
+		custoMenu.openMenu($(this), e);
+	});
+	$(document).on('click', '.custoMenu li', function(){
+		custoMenu.openFunction($(this));
+	});
+	$('body').on('click', function(e){
+		custoMenu.closeMenu();
+	});
 });
