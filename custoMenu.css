@@ -10,7 +10,7 @@
 	z-index: 1000;
 }
 .custoMenu li {
-	padding: 4px;
+	padding: 4px 8px;
 	cursor: pointer;
 }
 .custoMenu li:hover {
