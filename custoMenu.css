@@ -6,6 +6,7 @@
 	box-shadow: 0px 0px 3px 0px #292929;
 	filter:progid:DXImageTransform.Microsoft.Shadow(color=#292929, Direction=NaN, Strength=3);
 	background: white;
+	color: black;
 }
 .custoMenu li {
 	padding: 4px;
