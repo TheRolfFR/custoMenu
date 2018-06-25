@@ -57,4 +57,4 @@ custoMenu.addMenu(filectxmenu);
 ### 5. Enjoy !
 
 
-License: <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY 4.0 International</a>
+License: GNU Lesser General Public License v3.0
