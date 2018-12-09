@@ -24,7 +24,6 @@ Element.prototype.appendHTML = function(str) {
   while (div.children.length > 0) {
     this.appendChild(div.children[0]);
   }
-  return this.lastElementChild;
 }
 
 let custoMenu = {
@@ -33,8 +32,8 @@ let custoMenu = {
 	
 	addMenu : function(array) {
 		// append menu
-		let menu = document.body.appendHTML('<ul class="custoMenu" style="display: none;" data-name="' + array['name'] + '"></ul>');
-		console.log(menu);
+		document.body.appendHTML('<ul class="custoMenu" style="display: none;" data-name="' + array['name'] + '"></ul>');
+		menu = document.body.lastElementChild;
 		
 		// for each item in array
 		for(let key in array['items']) {
