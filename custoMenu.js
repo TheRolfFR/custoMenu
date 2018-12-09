@@ -1,6 +1,6 @@
 Element.prototype.querySelectorAttribute = function(selector, attribute, value) {
 	let els = document.querySelectorAll(selector);
-	array.forEach(element => {
+	els.forEach(element => {
 		if(element.hasAttribute(attribute) && element.getAttribute(attribute) == value) {
 			return element;
 		}
