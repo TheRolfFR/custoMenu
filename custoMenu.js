@@ -1,10 +1,30 @@
-var custoMenu = {
+Element.prototype.querySelectorAttribute = function(selector, attribute, value) {
+	let els = document.querySelectorAll(selector);
+	array.forEach(element => {
+		if(element.hasAttribute(attribute) && element.getAttribute(attribute) == value) {
+			return element;
+		}
+	});
+	return undefined;
+}
+Element.prototype.setStyle = function(object, value = '') {
+	if(typeof(object) == 'object') {
+		for(let key in object) {
+			if(key in this.style) { this.style[key] = object[key]; }
+		}
+	} else {
+		if(object in this.style) { this.style[object] = value; }
+	}
+}
+
+let custoMenu = {
 	functions: {},
 	element: '',
 	
 	addMenu : function(array) {
 		// append menu
-		var menu = $('<ul class="custoMenu" data-name="' + array['name'] + '"></ul>').appendTo('body').hide();
+		document.body.innerHTML = '<ul class="custoMenu" style="display: none;" data-name="' + array['name'] + '"></ul>';
+		var menu = document.querySelectorAttribute('ul.custoMenu', 'data-name', array['name']);
 		
 		// for each item in array
 		for(var key in array['items']) {
@@ -12,7 +32,7 @@ var custoMenu = {
 			var desc = array['items'][key]['desc'] || key.charAt(0).toUpperCase() + key.substr(1);
 			
 			// append item
-			menu.append('<li data-action="' + key + '" title="' + desc + '">' + array['items'][key]['text'] + '</li>');
+			menu.innerHTML += '<li data-action="' + key + '" title="' + desc + '">' + array['items'][key]['text'] + '</li>';
 			
 			// if defined, save function
 			var func = array['items'][key]['func'];
@@ -33,26 +53,29 @@ var custoMenu = {
 		// get name
 		var name = this.getData('data-name');
 		// get custoMenu
-		var ctxmenu = $('.custoMenu[data-name=' + name + ']');
+		var ctxmenu = document.querySelectorAttribute('ul.custoMenu', 'data-name', name);
 		
 		//display custoMenu
-		ctxmenu.show().css({
+		ctxmenu.setStyle({
+			display: "block",
 			top: e.pageY + "px",
 			left: e.pageX + "px"
 		});
 
 		// adjust position
-		if($(window).innerHeight() - e.pageY < ctxmenu.innerHeight()) {
-			ctxmenu.css('top', e.pageY-ctxmenu.innerHeight());
+		if(window.innerHeight - e.pageY < ctxmenu.offsetHeight) {
+			ctxmenu.setStyle('top', e.pageY - ctxmenu.offsetHeight);
 		}
 	},
 	closeMenu: function() {
 		// hide menu
-		$('.custoMenu').hide();
+		document.getElementsByClassName('custoMenu').forEach(element => {
+			element.style.display = "none";
+		});
 	},
 	openFunction: function(element) {
 		// get name of function
-		var action = element.attr('data-action');
+		var action = element.getAttribute('data-action');
 		// if this function is defined
 		if(typeof this.functions[action] === "function") {
 			// execute it
@@ -65,19 +88,33 @@ var custoMenu = {
 	},
 	getData: function(attribute) {
 		// get last clicked element attribute
-		return this.element.attr(attribute);
+		return this.element.getAttribute(attribute);
 	}
 }
-$(document).ready(function(){
-	$(document).on('contextmenu', '.custoMe', function(e){
-		e.preventDefault();
-		e.stopPropagation();
-		custoMenu.openMenu($(this), e);
+document.addEventListener('DOMContentLoaded', function(){
+	document.body.addEventListener('contextmenu', function(evt){
+		let el = evt.target;
+		while(el != document.body && !el.classList.contains('custoMe')) {
+			el = el.parentElement;
+		}
+
+		if(el.classList.contains('custoMe')) {
+			e.preventDefault();
+			e.stopPropagation();
+			custoMenu.openMenu(el, e);
+		}
 	});
-	$(document).on('click', '.custoMenu li', function(){
-		custoMenu.openFunction($(this));
-	});
-	$('body').on('click', function(e){
-		custoMenu.closeMenu();
+
+	document.body.addEventListener('click', function(evt){
+		let el = evt.target;
+		while(el != document.body && !el.classList.contains('custoMenu') && !el.tagName == "LI") {
+			el = el.parentElement;
+		}
+
+		if(el.classList.contains('custoMenu') && el.tagName == "LI") {
+			custoMenu.openFunction(el);
+		} else {
+			custoMenu.closeMenu();
+		}
 	});
 });
