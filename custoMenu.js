@@ -110,14 +110,13 @@ document.addEventListener('DOMContentLoaded', function(){
 
 	document.body.addEventListener('click', function(evt){
 		let el = evt.target;
-		while(el != document.body && !el.classList.contains('custoMenu') && !el.tagName == "LI") {
+		while(el != document.body && !el.parentElement.classList.contains('custoMenu') && el.tagName != "LI") {
 			el = el.parentElement;
 		}
 
-		if(el.classList.contains('custoMenu') && el.tagName == "LI") {
+		custoMenu.closeMenu();
+		if(el.parentElement.classList.contains('custoMenu') && el.tagName == "LI") {
 			custoMenu.openFunction(el);
-		} else {
-			custoMenu.closeMenu();
 		}
 	});
 });
