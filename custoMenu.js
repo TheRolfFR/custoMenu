@@ -24,7 +24,7 @@ let custoMenu = {
 	addMenu : function(array) {
 		// append menu
 		document.body.innerHTML = '<ul class="custoMenu" style="display: none;" data-name="' + array['name'] + '"></ul>';
-		var menu = document.querySelectorAttribute('ul.custoMenu', 'data-name', array['name']);
+		var menu = document.body.querySelectorAttribute('ul.custoMenu', 'data-name', array['name']);
 		
 		// for each item in array
 		for(var key in array['items']) {
@@ -53,7 +53,7 @@ let custoMenu = {
 		// get name
 		var name = this.getData('data-name');
 		// get custoMenu
-		var ctxmenu = document.querySelectorAttribute('ul.custoMenu', 'data-name', name);
+		var ctxmenu = document.body.querySelectorAttribute('ul.custoMenu', 'data-name', name);
 		
 		//display custoMenu
 		ctxmenu.setStyle({
