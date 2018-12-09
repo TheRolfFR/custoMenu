@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Demo custoMenu.js</title>
+    <link rel="stylesheet" href="custoMenu.css">
+    <link rel="stylesheet" href="https://codepen.io/TheRolf/pen/LNqZPv.css">
+    <script src="custoMenu.js"></script>
+    <style>
+        .custoMenu {
+            max-width: 80px;
+        }
+        .custoMenu li  {
+            display: inline-block;
+        }
+    </style>
+    <script>
+        // uses custoMenu. More at :
+        /*
+
+        https://github.com/TheRolfFR/custoMenu
+
+        */
+        var filectxmenu = {
+            name: 'file',
+            items: {
+                'openfile' : {
+                    text: '<i class="material-icons">&#xE254;</i>',
+                    desc: 'Open',
+                    func: function() {
+                        alert('lol');
+                    }
+                },
+                'downloadfile' : { 
+                    text: '<i class="material-icons">&#xE2C4;</i>',
+                    desc: 'Download'
+                },
+                'copy' : { 
+                    text: '<i class="material-icons">&#xE14D;</i>'
+                },
+                'cut' : { 
+                    text: '<i class="material-icons">&#xE14E;</i>'
+                },
+                'delete' : {
+                    text: '<i class="material-icons">&#xE872;</i>'
+                },
+                'rename' : {
+                    text: '<i class="material-icons">&#xE22B;</i>'
+                }
+            }
+        }
+        var contentmenu = {
+            name: 'content',
+            items: {
+                'refresh' : {
+                    text: '<i class="material-icons">&#xE5D5;</i>'
+                },
+                'paste' : { 
+                    text: '<i class="material-icons">&#xE14F;</i>'
+                },
+                'uploadfile' : { 
+                    text: '<i class="material-icons">&#xE2C6;</i>',
+                    desc: 'Upload file'
+                },
+                'newfile' : { 
+                    text: '<i class="material-icons">&#xE24D;</i>',
+                    desc: 'New file'
+                },
+                'newfolder' : {
+                    text: '<i class="material-icons">&#xE2CC;</i>',
+                    desc: 'New folder'
+                }
+            }
+        }
+        var foldermenu = {
+            name: 'folder',
+            items: {
+                'openfolder' : {
+                    text: '<i class="material-icons">&#xE254;</i>',
+                    desc: 'Open'
+                },
+                'copy' : { 
+                    text: '<i class="material-icons">&#xE14D;</i>'
+                },
+                'cut' : { 
+                    text: '<i class="material-icons">&#xE14E;</i>'
+                },
+                'delete' : {
+                    text: '<i class="material-icons">&#xE872;</i>'
+                },
+                'rename' : {
+                    text: '<i class="material-icons">&#xE22B;</i>'
+                },
+                'uploadfile' : { 
+                    text: '<i class="material-icons">&#xE2C6;</i>',
+                    desc: 'Upload file'
+                },
+                'newfile' : { 
+                    text: '<i class="material-icons">&#xE24D;</i>',
+                    desc: 'New file'
+                },
+                'newfolder' : {
+                    text: '<i class="material-icons">&#xE2CC;</i>',
+                    desc: 'New folder'
+                }
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function(){
+            custoMenu.addMenu(filectxmenu);
+            custoMenu.addMenu(contentmenu);
+            custoMenu.addMenu(foldermenu);
+        });
+    </script>
+</head>
+<body>
+    <div class="custoMe" data-name="file" data-src="source">file.txt</div>
+    <div class="custoMe" data-name="folder" data-src="source">folder/</div>
+    <div class="custoMe" data-name="content" data-src="source">content</div>
+</body>
+</html>

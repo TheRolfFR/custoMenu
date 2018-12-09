@@ -1,10 +1,12 @@
-Element.prototype.querySelectorAttribute = function(selector, attribute, value) {
+Document.prototype.querySelectorAttribute = function(selector, attribute, value) {
 	let els = document.querySelectorAll(selector);
-	els.forEach(element => {
+
+	for (let i = 0; i < els.length; i++) {
+		const element = els[i];
 		if(element.hasAttribute(attribute) && element.getAttribute(attribute) == value) {
 			return element;
 		}
-	});
+	}
 	return undefined;
 }
 Element.prototype.setStyle = function(object, value = '') {
@@ -23,19 +25,19 @@ let custoMenu = {
 	
 	addMenu : function(array) {
 		// append menu
-		document.body.innerHTML = '<ul class="custoMenu" style="display: none;" data-name="' + array['name'] + '"></ul>';
-		var menu = document.body.querySelectorAttribute('ul.custoMenu', 'data-name', array['name']);
+		document.body.innerHTML += '<ul class="custoMenu" style="display: none;" data-name="' + array['name'] + '"></ul>';
+		let menu = document.querySelectorAttribute('ul.custoMenu', 'data-name', array['name']);
 		
 		// for each item in array
-		for(var key in array['items']) {
+		for(let key in array['items']) {
 			// get desc 
-			var desc = array['items'][key]['desc'] || key.charAt(0).toUpperCase() + key.substr(1);
+			let desc = array['items'][key]['desc'] || key.charAt(0).toUpperCase() + key.substr(1);
 			
 			// append item
 			menu.innerHTML += '<li data-action="' + key + '" title="' + desc + '">' + array['items'][key]['text'] + '</li>';
 			
 			// if defined, save function
-			var func = array['items'][key]['func'];
+			let func = array['items'][key]['func'];
 			if(func !== undefined) {
 				if(typeof func === "function") {
 					this.functions[key] = func;
@@ -51,9 +53,9 @@ let custoMenu = {
 		this.upElement(element);
 		
 		// get name
-		var name = this.getData('data-name');
+		let name = this.getData('data-name');
 		// get custoMenu
-		var ctxmenu = document.body.querySelectorAttribute('ul.custoMenu', 'data-name', name);
+		let ctxmenu = document.querySelectorAttribute('ul.custoMenu', 'data-name', name);
 		
 		//display custoMenu
 		ctxmenu.setStyle({
@@ -69,13 +71,14 @@ let custoMenu = {
 	},
 	closeMenu: function() {
 		// hide menu
-		document.getElementsByClassName('custoMenu').forEach(element => {
-			element.style.display = "none";
-		});
+		let menus = document.getElementsByClassName('custoMenu');
+		for (let i = 0; i < menus.length; i++) {
+			menus[i].setStyle('display', 'none');
+		}
 	},
 	openFunction: function(element) {
 		// get name of function
-		var action = element.getAttribute('data-action');
+		let action = element.getAttribute('data-action');
 		// if this function is defined
 		if(typeof this.functions[action] === "function") {
 			// execute it
@@ -99,9 +102,9 @@ document.addEventListener('DOMContentLoaded', function(){
 		}
 
 		if(el.classList.contains('custoMe')) {
-			e.preventDefault();
-			e.stopPropagation();
-			custoMenu.openMenu(el, e);
+			evt.preventDefault();
+			evt.stopPropagation();
+			custoMenu.openMenu(el, evt);
 		}
 	});
 
