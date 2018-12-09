@@ -18,6 +18,14 @@ Element.prototype.setStyle = function(object, value = '') {
 		if(object in this.style) { this.style[object] = value; }
 	}
 }
+Element.prototype.appendHTML = function(str) {
+  var div = document.createElement('div');
+  div.innerHTML = str;
+  while (div.children.length > 0) {
+    this.appendChild(div.children[0]);
+  }
+  return this.lastElementChild;
+}
 
 let custoMenu = {
 	functions: {},
@@ -25,8 +33,8 @@ let custoMenu = {
 	
 	addMenu : function(array) {
 		// append menu
-		document.body.innerHTML += '<ul class="custoMenu" style="display: none;" data-name="' + array['name'] + '"></ul>';
-		let menu = document.querySelectorAttribute('ul.custoMenu', 'data-name', array['name']);
+		let menu = document.body.appendHTML('<ul class="custoMenu" style="display: none;" data-name="' + array['name'] + '"></ul>');
+		console.log(menu);
 		
 		// for each item in array
 		for(let key in array['items']) {
@@ -34,7 +42,7 @@ let custoMenu = {
 			let desc = array['items'][key]['desc'] || key.charAt(0).toUpperCase() + key.substr(1);
 			
 			// append item
-			menu.innerHTML += '<li data-action="' + key + '" title="' + desc + '">' + array['items'][key]['text'] + '</li>';
+			menu.appendHTML('<li data-action="' + key + '" title="' + desc + '">' + array['items'][key]['text'] + '</li>');
 			
 			// if defined, save function
 			let func = array['items'][key]['func'];
@@ -119,4 +127,4 @@ document.addEventListener('DOMContentLoaded', function(){
 			custoMenu.openFunction(el);
 		}
 	});
-});
+}, false);
