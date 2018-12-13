@@ -1,6 +1,10 @@
 # custoMenu
-[![License: CC BY-NC-SA 4.0](https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
-[![License: CC BY-NC-SA 4.0](https://licensebuttons.net/l/by-nc-sa/4.0/80x15.png)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
+![](https://img.shields.io/github/release/therolffr/custoMenu.svg?style=flat-square)
+![Drop, enjoy](https://img.shields.io/badge/Drop,-Enjoy%20!-red.svg?style=flat-square)
+[![Author](https://img.shields.io/badge/Author-TheRolfFR-%2331a589.svg?style=flat-square)](http://bit.ly/therolf-website)
+![License: LGPL--3.0](https://img.shields.io/badge/license-LGPL--3.0-lightgrey.svg?style=flat-square) 
+![Repo Size](https://img.shields.io/github/languages/code-size/TheRolfFR/custoMenu.svg?style=flat-square)
+[![jsDelivr Hits](https://data.jsdelivr.com/v1/package/gh/TheRolfFR/custoMenu/badge?style=flat-square)](https://www.jsdelivr.com/package/gh/TheRolfFR/custoMenu)
 
 Create custom context menus easily
 
@@ -11,21 +15,27 @@ Import custoMenu :
 <script src="path/to/custoMenu.js"></script>
 <link  href="path/to/custoMenu.css" rel="stylesheet" />
 ```
-You can use rawgit links to keep updated your custoMenu :
-```html
-<script src="https://rawgit.com/TheRolfFR/custoMenu/master/custoMenu.js"></script>
-<link  href="https://rawgit.com/TheRolfFR/custoMenu/master/custoMenu.css" rel="stylesheet" />
-```
+You can use jsDelivr links to keep updated your custoMenu : https://www.jsdelivr.com/package/gh/TheRolfFR/custoMenu 
+
 ### 2. Create your context menu object
-Handles these properties :
+The menu itself has this these properties :
 
 |      | Required |Type          | Desc |
 | ---- |:--------:|------------- | ---- |
 | name | X        | String       | Name of the custoMenu |
-| items| X        | Object       | Contains your functions |
+| items| X        | Object       | Contains your items |
+
+And each item has these properties :
+
+|      | Required |Type          | Desc |
+| ---- |:--------:|------------- | ---- |
 | text | X        | HTML         | Text of the custoMenu item |
 | desc |          | String       | Description of the custoMenu item |
-| func | X        | Function     | Function associated to the custoMenu item |
+| func | X        | Function or string    | Function associated to the custoMenu item r name or the fonction in the objectfunction object|
+| objectfunction |          | Object     | Object allowing user to load a function in the objectfunction context |
+
+Example :
+
 ```javascript
 var filectxmenu = {
 	name: 'file',
@@ -36,6 +46,12 @@ var filectxmenu = {
 			func: function() {
 				// your function
 			} // etc...
+		},
+		'openfile' : {
+			text: 'Open file',
+			func: 'myFunction',
+			objectfunction : myObject
+		}
   }
 }
   ```
@@ -50,6 +66,5 @@ custoMenu.addMenu(filectxmenu);
 <div class="custoMe" data-name="file">file.txt</div>
 ```
 ### 5. Enjoy !
-
 
 License: GNU Lesser General Public License v3.0

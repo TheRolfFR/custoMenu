@@ -30,26 +30,49 @@ let custoMenu = {
 	functions: {},
 	element: '',
 	
-	addMenu : function(array) {
+	addMenu : function(parameters) {
 		// append menu
-		document.body.appendHTML('<ul class="custoMenu" style="display: none;" data-name="' + array['name'] + '"></ul>');
+		const requiredparameters = ['name', 'file'];
+		for(let key in requiredparameters) {
+			if(!(key in parameters)) {
+				console.error(key + ' key is required to initialize your custoMenu : ', parameters);
+				return null;
+			}
+		}
+		document.body.appendHTML('<ul class="custoMenu" style="display: none;" data-name="' + parameters.name + '"></ul>');
 		menu = document.body.lastElementChild;
 		
-		// for each item in array
-		for(let key in array['items']) {
-			// get desc 
-			let desc = array['items'][key]['desc'] || key.charAt(0).toUpperCase() + key.substr(1);
-			
-			// append item
-			menu.appendHTML('<li data-action="' + key + '" title="' + desc + '">' + array['items'][key]['text'] + '</li>');
-			
-			// if defined, save function
-			let func = array['items'][key]['func'];
-			if(func !== undefined) {
-				if(typeof func === "function") {
-					this.functions[key] = func;
+		// for each item in parameters
+		for(let key in parameters.items) {
+			// required parameters for items
+			const requiredparametersitems = ['text', 'func'];
+			for(let prop in requiredparametersitems.items[key]) {
+				if(!(prop in parameters.items[key])) {
+					console.error(prop + 'key is required to initialize your custoMenu item : ', parameters.items[key]);
+					return;
 				}
 			}
+
+			// func required method
+			if(typeof parameters.items[key].func == 'string' && !('objectfunction' in requiredparametersitems.items[key])) {
+				console.error('if you are using a string parameter for func, you nee to specify the object related');
+				return;
+			}
+	
+			// desc return description or captilized key
+			let desc = parameters.items[key].desc || key.charAt(0).toUpperCase() + key.substr(1);
+			
+			// append item
+			menu.appendHTML('<li data-action="' + key + '" title="' + desc + '">' + parameters.items[key].text + '</li>');
+			
+			// adding functions
+			let object = {
+				func: parameters.items[key].func
+			};
+			if('objectfunc' in parameters.items[key]) {
+				object.objectfunction = parameters.items[key].objectfunction;
+			}
+			this.functions[key] = object;
 		}
 	},
 	openMenu : function(element, e) {
@@ -87,9 +110,11 @@ let custoMenu = {
 		// get name of function
 		let action = element.getAttribute('data-action');
 		// if this function is defined
-		if(typeof this.functions[action] === "function") {
+		if(typeof this.functions[action].func === "function") {
 			// execute it
-			this.functions[action]();
+			this.functions[action].func();
+		} else {
+			this.functions[action].objectfunction[this.functions[action].func]();
 		}
 	},
 	upElement: function(element) {
