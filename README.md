@@ -31,8 +31,7 @@ And each item has these properties :
 | ---- |:--------:|------------- | ---- |
 | text | X        | HTML         | Text of the custoMenu item |
 | desc |          | String       | Description of the custoMenu item |
-| func | X        | Function or string    | Function associated to the custoMenu item r name or the fonction in the objectfunction object|
-| objectfunction |          | Object     | Object allowing user to load a function in the objectfunction context |
+| func | X        | Function | Function associated to the custoMenu item |
 
 Example :
 
@@ -46,11 +45,6 @@ var filectxmenu = {
 			func: function() {
 				// your function
 			} // etc...
-		},
-		'openfile' : {
-			text: 'Open file',
-			func: 'myFunction',
-			objectfunction : myObject
 		}
   }
 }
