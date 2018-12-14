@@ -95,7 +95,7 @@ let custoMenu = {
 		});
 
 		// adjust position
-		if(e.pageY + ctxmenu.offsetHeight > window.innerHeight) {
+		if(window.innerHeight - e.pageY < ctxmenu.offsetHeight) {
 			ctxmenu.setStyle('top', e.pageY - ctxmenu.offsetHeight);
 		}
 	},
