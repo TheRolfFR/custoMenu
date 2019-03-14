@@ -104,7 +104,7 @@ let custoMenu = {
 document.addEventListener('DOMContentLoaded', function(){
 	document.body.addEventListener('contextmenu', function(evt){
 		let el = evt.target;
-		while(el != document.body && !el.classList.contains('custoMe')) {
+		while(el != null && el != document.body && !el.classList.contains('custoMe')) {
 			el = el.parentElement;
 		}
 
